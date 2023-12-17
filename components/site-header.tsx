@@ -39,7 +39,11 @@ export function SiteHeader() {
           </Link>
           <ThemeToggle />
           {
-            process.env.NEXT_PUBLIC_SANITY_DATASET === "production" ? <Link href="/studio"><Edit className="h-5 w-5" /></Link> : ""
+            process.env.NODE_ENV === "development" && <Link href="/studio">
+              <Button size="sm" variant="ghost">
+                <Edit className="h-5 w-5" />
+              </Button>
+            </Link>
           }
         </div>
       </div>
