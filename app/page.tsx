@@ -12,20 +12,31 @@ import { seedSanityData } from "@/lib/seed"
 interface Props {
   searchParams: {
     date?: string,
-    price?: string
+    price?: string,
+    color?: string,
+    size?: string,
+    category?: string,
   }
 }
 
 export default async function Page({ searchParams }: Props) {
-  const { price, date = "desc" } = searchParams
-
-
+  const { price, date = "desc", color, size, category } = searchParams
   const priceOrder = price ? `| order(price ${price})` : ""
   const dateOrder = date ? `| order(_createdAt ${date})` : ""
   const order = `${priceOrder}${dateOrder}`
-  const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"] ${order}{
+
+  const productFilter = `_type == "product"`
+  const colorFilter = color ? `&&  "${color}" in colors` : ""
+  const sizeFilter = size ? `&&  "${size}" in sizes` : ""
+  const categoryFilter = category ? `&&  "${category}" in categories` : ""
+
+  const filter = ` *[${productFilter}${colorFilter}${sizeFilter}${categoryFilter}]`
+
+
+  const products = await client.fetch<SanityProduct[]>(groq`${filter} ${order}{
     _id, createdAt, name, sku, images, price, currency, description,
     "slug":slug.current  }`)
+
 
   return (
     <div>

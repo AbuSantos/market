@@ -51,6 +51,7 @@ export function ProductFilters() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const searchEntries = Array.from(searchParams.entries())
+
   return (
     <form className="sticky top-20">
       <h3 className="sr-only">Categories</h3>
@@ -61,7 +62,9 @@ export function ProductFilters() {
             <AccordionTrigger>
               <span>
                 {section.name}
-                <span className="ml-1 text-xs font-extrabold uppercase text-gray-400"></span>
+                <span className="ml-1 text-xs font-extrabold uppercase text-gray-400">
+                  {searchParams.get(section.id) ? `(${searchParams.get(section.id)})` : ""}
+                </span>
               </span>
             </AccordionTrigger>
             <AccordionContent>
@@ -72,6 +75,7 @@ export function ProductFilters() {
                     className="flex items-center space-x-2"
                   >
                     <Checkbox
+                      // The checked prop is dynamically set based on whether the current option.value for a specific category (section.id) is present in the URL's query parameters (searchEntries).
                       checked={searchEntries.some(([key, value]) => key === section.id && value === option.value)}
                       id={`filter-${section.id}-${indx}`} onClick={(event) => {
                         const params = new URLSearchParams(searchParams)
