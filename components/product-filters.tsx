@@ -48,8 +48,9 @@ const filters = [
 ]
 
 export function ProductFilters() {
+  const router = useRouter()
   const searchParams = useSearchParams()
-  const router= useRouter()
+  const searchEntries = Array.from(searchParams.entries())
   return (
     <form className="sticky top-20">
       <h3 className="sr-only">Categories</h3>
@@ -70,12 +71,14 @@ export function ProductFilters() {
                     key={option.value}
                     className="flex items-center space-x-2"
                   >
-                    <Checkbox id={`filter-${section.id}-${indx}`} onClick={(event) => {
-                      const params = new URLSearchParams(searchParams)
-                      const checked = event.currentTarget.dataset.state === "checked"
-                      checked ? params.delete(section.id) : params.set(section.id, option.value)
-                      router.replace(`/?${params.toString()}`)
-                    }} />
+                    <Checkbox
+                      checked={searchEntries.some(([key, value]) => key === section.id && value === option.value)}
+                      id={`filter-${section.id}-${indx}`} onClick={(event) => {
+                        const params = new URLSearchParams(searchParams)
+                        const checked = event.currentTarget.dataset.state === "checked"
+                        checked ? params.delete(section.id) : params.set(section.id, option.value)
+                        router.replace(`/?${params.toString()}`)
+                      }} />
                     <label
                       htmlFor={`filter-${section.id}-${indx}`}
                       className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
