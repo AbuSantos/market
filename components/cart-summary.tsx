@@ -8,13 +8,43 @@ import { Button } from "@/components/ui/button"
 import { product } from "@/sanity/schemas/product-schema"
 
 export function CartSummary() {
-  const { formattedTotalPrice, cartCount, cartDetails, totalPrice } = useShoppingCart()
+  const { formattedTotalPrice, cartCount, cartDetails, totalPrice, redirectToCheckout } = useShoppingCart()
   const [isLoading, setIsLoading] = useState(false)
+  // disabling the checkout button if we're loading or if we have nothing in the count
+  const isDisabled = isLoading || cartCount! === 0
   const shippingAmount = cartCount! > 0 ? 500 : 0
   const totalAmount = shippingAmount + totalPrice!
 
-  function onCheckout() { }
+  const onCheckout = async () => {
+    try {
+      setIsLoading(true);
+      const res = await fetch('/api/checkout', {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(cartDetails)
+      });
 
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+
+      const data = await res.json();
+      console.log(cartDetails);
+
+      const result = await redirectToCheckout(data.id);
+
+      if (result?.error) {
+        throw new Error(result.error.message);
+      }
+
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      setIsLoading(false);
+    }
+  };
   return (
     <section
       aria-labelledby="summary-heading"
@@ -42,9 +72,9 @@ export function CartSummary() {
       </dl>
 
       <div className="mt-6">
-        <Button onClick={onCheckout} className="w-full">
+        <Button onClick={onCheckout} className="w-full" disabled={isDisabled}>
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-          {isLoading ? " Loading..." : "check out"}
+          {isLoading ? " Loading..." : "Checkout"}
         </Button>
       </div>
     </section>
