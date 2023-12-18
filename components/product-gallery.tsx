@@ -34,10 +34,10 @@ export function ProductGallery({ product }: Props) {
                   className="h-full w-full object-cover object-center"
                 />
               </span>
-              {/* <span
-                  className="pointer-events-none absolute inset-0 rounded-md ring-4 ring-indigo-500 ring-offset-2"
-                  aria-hidden="true"
-                /> */}
+              {index === selectedImage && <span
+                className="pointer-events-none absolute inset-0 rounded-md ring-4 ring-indigo-500 ring-offset-2"
+                aria-hidden="true"
+              />}
             </div>
           ))}
         </ul>
