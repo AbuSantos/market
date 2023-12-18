@@ -63,7 +63,7 @@ export function ProductInfo({ product }: Props) {
         {sizes.map((size) => (
           <Button
             onClick={() => setSelectedSize(size)}
-            variant={selectSize === size ? "default" : "outlined"}
+            variant={selectSize === size ? "default" : "outline"}
             key={size} className="mr-2 mt-4">
             {getSizeName(size)}
           </Button>
