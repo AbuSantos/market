@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { urlForImage } from "@/sanity/lib/image"
 import { Clock, X } from "lucide-react"
-import { formatCurrencyString, removeItem, useShoppingCart } from "use-shopping-cart"
+import { formatCurrencyString, useShoppingCart } from "use-shopping-cart"
 import { Product } from "use-shopping-cart/core"
 
 import { shimmer, toBase64 } from "@/lib/image"
@@ -15,7 +15,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { CartItemsEmpty } from "@/components/cart-items-empty"
 
 export function CartItems() {
-  const { cartDetails, setItemQuantity } = useShoppingCart()
+  const { cartDetails, removeItem, setItemQuantity } = useShoppingCart()
   //we made all item enterd an object, then mapped over them returning the product
   const cartItems = Object.entries(cartDetails!).map(([_, product]) => product)
   // console.log(cartItems);
@@ -23,10 +23,14 @@ export function CartItems() {
 
   function removeCartItem(product: Product) {
     removeItem(product._id)
-    toast
+    toast({
+      title: `${product.name} removed`,
+      description: "product removed from the cart",
+      variant: "destructive"
+    })
   }
 
-  if (cartItems === 0) return <CartItemsEmpty />
+  if (cartItems.length === 0) return <CartItemsEmpty />
 
   return (
     <ul
