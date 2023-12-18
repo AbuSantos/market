@@ -31,7 +31,7 @@ export function CartSummary() {
       }
 
       const data = await res.json();
-      console.log(cartDetails);
+      console.log(data);
 
       const result = await redirectToCheckout(data.id);
 

@@ -6,7 +6,7 @@ import { inventory } from "@/config/inventory"
 import { stripe } from "@/lib/stripe"
 
 export async function POST(request: Request) {
-  const cartDetails = request.json()
+  const cartDetails = await request.json()
   console.log("cartdetails:", cartDetails)
   const lineItems = validateCartItems(inventory, cartDetails)
   const origin = request.headers.get("origin")
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
     payment_method_types: ["card"],
     line_items: lineItems,
     shipping_address_collection: {
-      allowed_countries: ["US", "NG"],
+      allowed_countries: ["US"],
     },
     shipping_options: [
       {
