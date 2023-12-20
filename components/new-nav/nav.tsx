@@ -22,8 +22,13 @@ const links = [
         href: "/about",
         src: "home.png"
     },
+    {
+        title: "Contact Us",
+        href: "/contactus",
+        src: "home.png"
+    },
 
-    
+
 ]
 
 export default function Nav() {
