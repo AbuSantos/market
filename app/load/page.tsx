@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Lenis from '@studio-freight/lenis'
 import { useTransform, useScroll, motion } from 'framer-motion';
 import Header from '@/components/new-nav/header';
+import WelcomePage from '@/components/welcome/welcome-page';
 
 const images = [
     "1.jpg",
@@ -60,7 +61,9 @@ export default function Page() {
     return (
         <main className={styles.main}>
             <Header />
-            <div className={styles.spacer}></div>
+            <div className={styles.spacer}>
+                <WelcomePage />
+            </div>
             <div ref={gallery} className={styles.gallery}>
                 <Column images={[images[0], images[1], images[2]]} y={y} />
                 <Column images={[images[3], images[4], images[5]]} y={y2} />
