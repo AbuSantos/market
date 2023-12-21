@@ -9,7 +9,7 @@ import Images from './images';
 const links = [
     {
         title: "Home",
-        href: "/",
+        href: "/shop",
         src: "1.jpg"
     },
     {

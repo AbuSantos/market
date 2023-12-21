@@ -35,7 +35,7 @@ export default function Header() {
     return (
         <div className={styles.header}>
             <div className={styles.bar}>
-                <Link href="/">ruthrichdesign</Link>
+                <Link href="/shop">ruthrichdesign</Link>
 
                 <div onClick={() => { setIsActive(!isActive) }} className={styles.el}>
                     <div className={`${styles.burger} ${isActive ? styles.burgerActive : ""}`}></div>

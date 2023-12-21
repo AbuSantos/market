@@ -1,4 +1,4 @@
-import Test from "./test"
+import Test from "./welcome-display"
 
 const page = () => {
     return (

@@ -49,7 +49,7 @@ export function ProductGallery({ product }: Props) {
           placeholder="blur"
           blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(600, 750))}`}
           priority
-          src={urlForImage(product.images[selectedImage]).url()}
+          src={urlForImage(product?.images[selectedImage])?.url()}
           alt={`main ${product.name} image`}
           width={600}
           height={750}

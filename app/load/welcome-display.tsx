@@ -22,7 +22,7 @@ const images = [
     "12.jpg",
 ]
 
-export default function Test() {
+export default function WelcomeDisplay() {
 
     const gallery = useRef(null);
     const [dimension, setDimension] = useState({ width: 0, height: 0 });
@@ -75,7 +75,7 @@ export default function Test() {
     )
 }
 
-const Column = ({ images, y }:any) => {
+const Column = ({ images, y }: any) => {
     return (
         <motion.div
             className={styles.column}
