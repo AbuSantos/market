@@ -34,14 +34,16 @@ const links = [
 export default function Nav() {
 
     const [selectedLink, setSelectedLink] = useState({ isActive: false, index: 0 });
-
+    const selectedSrc = selectedLink.index !== null && selectedLink.index !== undefined
+        ? links[selectedLink.index].src
+        : null;
     return (
         <motion.div variants={height} initial="initial" animate="enter" exit="exit" className={styles.nav}>
             <div className={styles.wrapper}>
                 <div className={styles.container}>
                     <Body links={links} selectedLink={selectedLink} setSelectedLink={setSelectedLink} />
                 </div>
-                <Images src={links[selectedLink.index].src} isActive={selectedLink.isActive} />
+                <Images src={selectedSrc} isActive={selectedLink.isActive} />
             </div>
         </motion.div>
     )

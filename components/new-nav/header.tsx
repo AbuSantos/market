@@ -74,10 +74,7 @@ export default function Header() {
                         </div>
                     </div>
 
-                    {/* <Button size="sm" variant="ghost">
-                            <span className="ml-2 text-sm font-bold">{cartCount}</span>
-                            <span className="sr-only">Cart</span>
-                        </Button> */}
+
                 </motion.div>
             </div>
             <motion.div variants={background} initial="initial" animate={isActive ? "open" : "closed"} className={styles.background}></motion.div>

@@ -2,6 +2,7 @@
 import styles from './style.module.css';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 const anim = {
     initial: { width: 0 },
@@ -10,12 +11,13 @@ const anim = {
 }
 
 export default function index({ project }) {
+    const router = useRouter()
 
     const [isActive, setIsActive] = useState(false);
 
-    const { title1, title2, src } = project;
+    const { title1, title2, src, link } = project;
     return (
-        <div onMouseEnter={() => { setIsActive(true) }} onMouseLeave={() => { setIsActive(false) }} className={styles.project}>
+        <div onMouseEnter={() => { setIsActive(true) }} onMouseLeave={() => { setIsActive(false) }} className={styles.project} onClick={() => router.push(`product/${link}`)}>
             <p>{title1}</p>
             <motion.div variants={anim} animate={isActive ? "open" : "closed"} className={styles.imgContainer}>
                 <img src={`/images/${src}`}></img>

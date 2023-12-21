@@ -1,34 +1,59 @@
-'use client'
 import styles from './style.module.css'
 import Project from './project';
+import type { GetStaticProps } from 'next'
+import { client } from "@/sanity/lib/client"
+import { groq } from "next-sanity"
+import { SanityProduct } from "@/config/inventory"
+import { Product } from 'use-shopping-cart/core';
 
-export default function WelcomePage() {
+interface Props {
+    products: SanityProduct[] | null,
+}
+
+
+
+export default function WelcomePage({ products }: Props) {
+    //   const categoryFilter = category ? `&&  "${category}" in categories` : ""
+
+    // const products = await client.fetch<SanityProduct[]>(groq`*[_type == "product"]{
+    //     _id, createdAt, name,categories, sku, images, price, currency, description,
+    //     "slug":slug.current  }`)
+
 
     const projects = [
         {
-            title1: "Bubba",
-            title2: "Women",
-            src: "bobba.jpeg"
+            title1: "Sunglasses",
+            title2: "Wo/Men",
+            src: "bobba.jpeg",
+            link: "/sunglasses"
         },
         {
-            title1: "Cargo Pants",
-            title2: "Wo/Men",
-            src: "cargo.jpeg"
+            title1: "Belts",
+            title2: "Men",
+            src: "cargo.jpeg",
+            link: "/belts"
+
         },
         {
             title1: "Kaftan",
             title2: "Men",
-            src: "kaftan.jpeg"
+            src: "kaftan.jpeg",
+            link: "/bags"
+
         },
         {
             title1: "Two Piece",
             title2: "Women",
-            src: "nothing_design_studio.png"
+            src: "nothing_design_studio.png",
+            link: "/scarves"
+
         },
         {
-            title1: "Jumpsuit",
-            title2: "Women",
-            src: "jumpsuit.png"
+            title1: "Gloves",
+            title2: "Wo/Men",
+            src: "jumpsuit.png",
+            link: "/gloves"
+
         }
     ]
 
@@ -45,3 +70,8 @@ export default function WelcomePage() {
         </main>
     )
 }
+
+
+
+
+
