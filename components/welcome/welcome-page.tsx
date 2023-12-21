@@ -22,14 +22,14 @@ export default function WelcomePage({ products }: Props) {
 
     const projects = [
         {
-            title1: "Sunglasses",
-            title2: "Wo/Men",
+            title1: "Bobba",
+            title2: "Women",
             src: "bobba.jpeg",
             link: "/sunglasses"
         },
         {
-            title1: "Belts",
-            title2: "Men",
+            title1: "Combats",
+            title2: "Wo/Men",
             src: "cargo.jpeg",
             link: "/belts"
 
@@ -49,7 +49,7 @@ export default function WelcomePage({ products }: Props) {
 
         },
         {
-            title1: "Gloves",
+            title1: "Jumpsuits",
             title2: "Wo/Men",
             src: "jumpsuit.png",
             link: "/gloves"
